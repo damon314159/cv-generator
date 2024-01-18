@@ -1,3 +1,5 @@
+import { type FormEvent } from 'react'
+
 export interface FormBuilderField {
   name: string
   id: string
@@ -7,6 +9,9 @@ export interface FormBuilderField {
 
 export interface FormBuilderProps {
   formFields: FormBuilderField[]
+  onSubmitFactory: (
+    formValues: Record<string, string>
+  ) => (event: FormEvent<HTMLFormElement>) => void
 }
 
 export default FormBuilderProps

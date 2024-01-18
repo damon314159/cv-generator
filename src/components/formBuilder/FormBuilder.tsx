@@ -7,7 +7,10 @@ import {
 } from '../../interfaces/FormBuilderProps'
 
 // Take a collection of field objects to create a React controlled form
-function FormBuilder({ formFields }: FormBuilderProps): JSX.Element {
+function FormBuilder({
+  formFields,
+  onSubmitFactory
+}: FormBuilderProps): JSX.Element {
   // Create state that tracks value of each input field
   const [formValues, setFormValues] = useState(
     formFields.reduce(
@@ -41,6 +44,7 @@ function FormBuilder({ formFields }: FormBuilderProps): JSX.Element {
           id: formField.id
         })
       )}
+      onSubmit={onSubmitFactory(formValues)}
     />
   )
 }

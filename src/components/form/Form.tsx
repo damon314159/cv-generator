@@ -1,13 +1,16 @@
+import { type FormEvent } from 'react'
 import type FormFieldProps from '../../interfaces/FormFieldProps'
+import './Form.css'
 
 interface FormProps {
   fields: FormFieldProps[]
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }
 
 // Read the fields as passed by the parent form-builder
-function Form({ fields }: FormProps): JSX.Element {
+function Form({ fields, onSubmit }: FormProps): JSX.Element {
   return (
-    <>
+    <form autoComplete="true" onSubmit={onSubmit}>
       {fields.map((formField: FormFieldProps) => (
         // Map each field into an input element with corresponding attributes
         <input
@@ -19,7 +22,8 @@ function Form({ fields }: FormProps): JSX.Element {
           required={formField.required}
         />
       ))}
-    </>
+      <button type="submit">Submit</button>
+    </form>
   )
 }
 
