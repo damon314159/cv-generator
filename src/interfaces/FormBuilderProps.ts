@@ -12,6 +12,7 @@ export interface FormBuilderProps {
   onSubmitFactory: (
     formValues: Record<string, string>
   ) => (event: FormEvent<HTMLFormElement>) => void
+  existingData: Record<string, string> | null
 }
 
 export default FormBuilderProps

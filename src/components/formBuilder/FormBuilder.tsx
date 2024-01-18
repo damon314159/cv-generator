@@ -9,22 +9,26 @@ import {
 // Take a collection of field objects to create a React controlled form
 function FormBuilder({
   formFields,
-  onSubmitFactory
+  onSubmitFactory,
+  existingData
 }: FormBuilderProps): JSX.Element {
   // Create state that tracks value of each input field
   const [formValues, setFormValues] = useState(
-    formFields.reduce(
-      (
-        initialState: Record<string, string>,
-        field: FormBuilderField
-      ): Record<string, string> => {
-        // Take each field in turn, and write {name: ''} to initial state object
-        const newField: Record<string, string> = {}
-        newField[field.name] = ''
-        return Object.assign(initialState, newField)
-      },
-      {}
-    )
+    // If existing data given to edit, use that
+    existingData ??
+      // If not, create a blank dataset
+      formFields.reduce(
+        (
+          initialState: Record<string, string>,
+          field: FormBuilderField
+        ): Record<string, string> => {
+          // Take each field in turn, and write {name: ''} to initial state object
+          const newField: Record<string, string> = {}
+          newField[field.name] = ''
+          return Object.assign(initialState, newField)
+        },
+        {}
+      )
   )
   return (
     <Form
