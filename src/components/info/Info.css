@@ -1,0 +1,17 @@
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-pairs > * {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
