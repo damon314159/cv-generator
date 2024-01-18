@@ -8,6 +8,7 @@ import './Info.css'
 const infoFields: FormBuilderField[] = [
   { name: 'firstName', id: uuid.v4(), type: 'text', required: true },
   { name: 'lastName', id: uuid.v4(), type: 'text', required: true },
+  { name: 'jobTitle', id: uuid.v4(), type: 'text', required: true },
   { name: 'email', id: uuid.v4(), type: 'email', required: true },
   { name: 'phone', id: uuid.v4(), type: 'tel', required: true },
   { name: 'city', id: uuid.v4(), type: 'text', required: false },
