@@ -6,10 +6,11 @@ import titleCase from '../../helpers/titleCase'
 interface FormProps {
   fields: FormFieldProps[]
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
+  onCancel: () => void
 }
 
 // Read the fields as passed by the parent form-builder
-function Form({ fields, onSubmit }: FormProps): JSX.Element {
+function Form({ fields, onSubmit, onCancel }: FormProps): JSX.Element {
   return (
     <form autoComplete="true" onSubmit={onSubmit}>
       {fields.map((formField: FormFieldProps) => (
@@ -28,7 +29,9 @@ function Form({ fields, onSubmit }: FormProps): JSX.Element {
       ))}
       <div className="btn-wrapper">
         <button type="submit">Submit</button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
       </div>
     </form>
   )

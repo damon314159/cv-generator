@@ -13,6 +13,7 @@ export interface FormBuilderProps {
     formValues: Record<string, string>
   ) => (event: FormEvent<HTMLFormElement>) => void
   existingData: Record<string, string> | null
+  onCancel: () => void
 }
 
 export default FormBuilderProps

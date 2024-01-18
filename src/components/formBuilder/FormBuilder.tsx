@@ -10,7 +10,8 @@ import {
 function FormBuilder({
   formFields,
   onSubmitFactory,
-  existingData
+  existingData,
+  onCancel
 }: FormBuilderProps): JSX.Element {
   // Create state that tracks value of each input field
   const [formValues, setFormValues] = useState(
@@ -49,6 +50,7 @@ function FormBuilder({
         })
       )}
       onSubmit={onSubmitFactory(formValues)}
+      onCancel={onCancel}
     />
   )
 }
