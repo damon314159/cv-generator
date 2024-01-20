@@ -1,3 +1,4 @@
+import * as uuid from 'uuid'
 import { type ChangeEvent, useState } from 'react'
 import Form from '../form/Form'
 import type FormFieldProps from '../../interfaces/FormFieldProps'
@@ -18,17 +19,21 @@ function FormBuilder({
     // If existing data given to edit, use that
     existingData ??
       // If not, create a blank dataset
-      formFields.reduce(
-        (
-          initialState: Record<string, string>,
-          field: FormBuilderField
-        ): Record<string, string> => {
-          // Take each field in turn, and write {name: ''} to initial state object
-          const newField: Record<string, string> = {}
-          newField[field.name] = ''
-          return Object.assign(initialState, newField)
-        },
-        {}
+      Object.assign(
+        formFields.reduce(
+          (
+            initialState: Record<string, string>,
+            field: FormBuilderField
+          ): Record<string, string> => {
+            // Take each field in turn, and write {name: ''} to initial state object
+            const newField: Record<string, string> = {}
+            newField[field.name] = ''
+            return Object.assign(initialState, newField)
+          },
+          {}
+        ),
+        // Give each set of values an ID for parent components to use as a key
+        { id: uuid.v4() }
       )
   )
   return (
