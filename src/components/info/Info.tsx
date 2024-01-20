@@ -17,34 +17,26 @@ const infoFields: FormBuilderField[] = [
 
 function Info(): JSX.Element {
   const [isEdit, setIsEdit] = useState(false)
-  const [userInfo, setUserInfo] = useState(
-    infoFields.reduce(
-      (
-        initialState: Record<string, string>,
-        field: FormBuilderField
-      ): Record<string, string> => {
-        // Take each field in turn, and write {name: ''} to initial state object
-        const newField: Record<string, string> = {}
-        newField[field.name] = ''
-        return Object.assign(initialState, newField)
-      },
-      {}
-    )
-  )
+  const [userInfo, setUserInfo] = useState<null | Record<string, string>>(null)
+
   if (isEdit) {
     return (
       <>
         <h3>Edit Info</h3>
         <FormBuilder
           formFields={infoFields}
+          // Take values from the form, and return an onSubmit function
           onSubmitFactory={(formValues: Record<string, string>) =>
+            // onSubmit takes the form event, actions it, returning void
             (event: FormEvent<HTMLFormElement>): void => {
               event.preventDefault()
+              // Close the editor after submission
               setIsEdit(false)
               setUserInfo(formValues)
             }}
           existingData={userInfo}
           onCancel={() => {
+            // Cancelling closes the editor without setting new info
             setIsEdit(false)
           }}
         />
@@ -56,16 +48,18 @@ function Info(): JSX.Element {
     <div className="info-wrapper">
       <h3>Info</h3>
       <div className="info-pairs">
-        {Object.entries(userInfo).map(([name, value]) => (
-          <div key={name}>
-            <span>{titleCase(name)}:</span>
-            <span>{value || 'None'}</span>
+        {infoFields.map((field) => (
+          <div key={field.id}>
+            {/* For each field, render the name and stored data, if any */}
+            <span>{titleCase(field.name)}:</span>
+            <span>{userInfo?.[field.name] || 'None'}</span>
           </div>
         ))}
       </div>
       <button
         type="button"
         onClick={() => {
+          // Edit button opens the editor view
           setIsEdit(true)
         }}
       >
