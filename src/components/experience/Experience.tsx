@@ -14,6 +14,19 @@ const experienceFields: FormBuilderField[] = [
   { name: 'responsibilities', id: uuid.v4(), type: 'textarea', required: false }
 ]
 
+/*
+Important Note:
+
+The Education and Experience components are identical in design, only differing
+by the fields object above. The functionality below could be taken to a shared
+child component and the data above provided in props.
+
+The deliberate choice to not do this has been made, since while it would curb
+some repetition, the developer does not know if these components will diverge
+by the end of this project, and there certainly will not be more than two such
+components. This does not trip the 'rule of three' but is worth noting.
+*/
+
 function Experience(): JSX.Element {
   const [editorStatus, setEditorStatus] = useState<{
     isOpen: boolean
