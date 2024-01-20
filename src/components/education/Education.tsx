@@ -69,47 +69,49 @@ function Education(): JSX.Element {
     <div className="education-wrapper">
       <h3>Education</h3>
 
-      {educations.length === 0
-        ? // If there are no educations, render None
-          'None'
-        : // Else
-          educations.map((education) => (
-            // Map each education to a view of its data
-            <div className="education-instance" key={education.id}>
-              <div className="education-pairs">
-                {educationFields.map((field) => (
-                  <div key={field.id}>
-                    {/* For each field, render the name and stored data, if any */}
-                    <span>{titleCase(field.name)}:</span>
-                    <span>{education[field.name] || 'None'}</span>
-                  </div>
-                ))}
-              </div>
-              <button
-                // Button to edit this education
-                type="button"
-                onClick={() => {
-                  setEditorStatus({
-                    ...editorStatus,
-                    isOpen: true,
-                    itemID: education.id
-                  })
-                }}
-              >
-                Edit
-              </button>
-              <button
-                // Button to delete this education
-                type="button"
-                onClick={() => {
-                  // Filter out this education by equivalent object
-                  setEducations(educations.filter((el) => el !== education))
-                }}
-              >
-                Delete
-              </button>
+      {educations.length === 0 ? (
+        // If there are no educations, render None
+        <div className="education-instance">None</div>
+      ) : (
+        // Else
+        educations.map((education) => (
+          // Map each education to a view of its data
+          <div className="education-instance" key={education.id}>
+            <div className="education-pairs">
+              {educationFields.map((field) => (
+                <div key={field.id}>
+                  {/* For each field, render the name and stored data, if any */}
+                  <span>{titleCase(field.name)}:</span>
+                  <span>{education[field.name] || 'None'}</span>
+                </div>
+              ))}
             </div>
-          ))}
+            <button
+              // Button to edit this education
+              type="button"
+              onClick={() => {
+                setEditorStatus({
+                  ...editorStatus,
+                  isOpen: true,
+                  itemID: education.id
+                })
+              }}
+            >
+              Edit
+            </button>
+            <button
+              // Button to delete this education
+              type="button"
+              onClick={() => {
+                // Filter out this education by equivalent object
+                setEducations(educations.filter((el) => el !== education))
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        ))
+      )}
 
       <button
         // Button to add a brand new education

@@ -71,47 +71,49 @@ function Experience(): JSX.Element {
     <div className="experience-wrapper">
       <h3>Experience</h3>
 
-      {experiences.length === 0
-        ? // If there are no experiences, render None
-          'None'
-        : // Else
-          experiences.map((experience) => (
-            // Map each experience to a view of its data
-            <div className="experience-instance" key={experience.id}>
-              <div className="experience-pairs">
-                {experienceFields.map((field) => (
-                  <div key={field.id}>
-                    {/* For each field, render the name and stored data, if any */}
-                    <span>{titleCase(field.name)}:</span>
-                    <span>{experience[field.name] || 'None'}</span>
-                  </div>
-                ))}
-              </div>
-              <button
-                // Button to edit this experience
-                type="button"
-                onClick={() => {
-                  setEditorStatus({
-                    ...editorStatus,
-                    isOpen: true,
-                    itemID: experience.id
-                  })
-                }}
-              >
-                Edit
-              </button>
-              <button
-                // Button to delete this experience
-                type="button"
-                onClick={() => {
-                  // Filter out this experience by equivalent object
-                  setExperiences(experiences.filter((el) => el !== experience))
-                }}
-              >
-                Delete
-              </button>
+      {experiences.length === 0 ? (
+        // If there are no experiences, render None
+        <div className="experience-instance">None</div>
+      ) : (
+        // Else
+        experiences.map((experience) => (
+          // Map each experience to a view of its data
+          <div className="experience-instance" key={experience.id}>
+            <div className="experience-pairs">
+              {experienceFields.map((field) => (
+                <div key={field.id}>
+                  {/* For each field, render the name and stored data, if any */}
+                  <span>{titleCase(field.name)}:</span>
+                  <span>{experience[field.name] || 'None'}</span>
+                </div>
+              ))}
             </div>
-          ))}
+            <button
+              // Button to edit this experience
+              type="button"
+              onClick={() => {
+                setEditorStatus({
+                  ...editorStatus,
+                  isOpen: true,
+                  itemID: experience.id
+                })
+              }}
+            >
+              Edit
+            </button>
+            <button
+              // Button to delete this experience
+              type="button"
+              onClick={() => {
+                // Filter out this experience by equivalent object
+                setExperiences(experiences.filter((el) => el !== experience))
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        ))
+      )}
 
       <button
         // Button to add a brand new experience
