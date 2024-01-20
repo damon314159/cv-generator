@@ -4,7 +4,7 @@ interface FormFieldProps {
   name: string
   type: string
   value: string
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
   required: boolean
   id: string
 }

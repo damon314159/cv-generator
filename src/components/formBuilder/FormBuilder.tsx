@@ -45,7 +45,9 @@ function FormBuilder({
           type: formField.type,
           value: formValues[formField.name],
           // Write to state via a closured onChange function
-          onChange: (event: ChangeEvent<HTMLInputElement>) => {
+          onChange: (
+            event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => {
             const newValues = { ...formValues }
             newValues[formField.name] = event.target.value
             setFormValues(newValues)
