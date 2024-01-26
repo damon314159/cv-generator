@@ -86,7 +86,9 @@ function Experience(): JSX.Element {
 
       {experiences.length === 0 ? (
         // If there are no experiences, render None
-        <div className="experience-instance">None</div>
+        <div className="experience-instance">
+          <div>None</div>
+        </div>
       ) : (
         // Else
         experiences.map((experience) => (

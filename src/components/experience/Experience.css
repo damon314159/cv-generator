@@ -1,0 +1,23 @@
+.experience-wrapper,
+.experience-pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.experience-instance {
+  display: grid;
+  grid-template: 1fr max-content / 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.experience-instance > :first-child {
+  grid-area: 1/1/2/3;
+}
+
+.experience-pairs > * {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}

@@ -84,7 +84,9 @@ function Education(): JSX.Element {
 
       {educations.length === 0 ? (
         // If there are no educations, render None
-        <div className="education-instance">None</div>
+        <div className="education-instance">
+          <div>None</div>
+        </div>
       ) : (
         // Else
         educations.map((education) => (
