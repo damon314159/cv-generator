@@ -15,9 +15,15 @@ const infoFields: FormBuilderField[] = [
   { name: 'county', id: uuid.v4(), type: 'text', required: false }
 ]
 
-function Info(): JSX.Element {
+interface InfoProps {
+  userInfo: Record<string, string> | null
+  setUserInfo: React.Dispatch<
+    React.SetStateAction<Record<string, string> | null>
+  >
+}
+
+function Info({ userInfo, setUserInfo }: InfoProps): JSX.Element {
   const [isEdit, setIsEdit] = useState(false)
-  const [userInfo, setUserInfo] = useState<null | Record<string, string>>(null)
 
   if (isEdit) {
     return (

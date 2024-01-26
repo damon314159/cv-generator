@@ -27,7 +27,12 @@ by the end of this project, and there certainly will not be more than two such
 components. This does not trip the 'rule of three' but is worth noting.
 */
 
-function Education(): JSX.Element {
+interface EducationProps {
+  educations: Record<string, string>[]
+  setEducations: React.Dispatch<React.SetStateAction<Record<string, string>[]>>
+}
+
+function Education({ educations, setEducations }: EducationProps): JSX.Element {
   const [editorStatus, setEditorStatus] = useState<{
     isOpen: boolean
     itemID: null | string
@@ -35,7 +40,6 @@ function Education(): JSX.Element {
     isOpen: false,
     itemID: null
   })
-  const [educations, setEducations] = useState<Record<string, string>[]>([])
 
   if (editorStatus.isOpen) {
     return (

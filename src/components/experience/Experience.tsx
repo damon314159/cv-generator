@@ -27,7 +27,15 @@ by the end of this project, and there certainly will not be more than two such
 components. This does not trip the 'rule of three' but is worth noting.
 */
 
-function Experience(): JSX.Element {
+interface ExperienceProps {
+  experiences: Record<string, string>[]
+  setExperiences: React.Dispatch<React.SetStateAction<Record<string, string>[]>>
+}
+
+function Experience({
+  experiences,
+  setExperiences
+}: ExperienceProps): JSX.Element {
   const [editorStatus, setEditorStatus] = useState<{
     isOpen: boolean
     itemID: null | string
@@ -35,7 +43,6 @@ function Experience(): JSX.Element {
     isOpen: false,
     itemID: null
   })
-  const [experiences, setExperiences] = useState<Record<string, string>[]>([])
 
   if (editorStatus.isOpen) {
     return (
