@@ -97,13 +97,17 @@ function Education({ educations, setEducations }: EducationProps): JSX.Element {
           // Map each education to a view of its data
           <div className="education-instance" key={education.id}>
             <div className="education-pairs">
-              {educationFields.map((field) => (
-                <div key={field.id}>
-                  {/* For each field, render the name and stored data, if any */}
-                  <span>{titleCase(field.name)}:</span>
-                  <span>{education[field.name] || 'None'}</span>
-                </div>
-              ))}
+              {educationFields
+                .filter((field) =>
+                  ['institution', 'course'].includes(field.name)
+                )
+                .map((field) => (
+                  <div key={field.id}>
+                    {/* For each field, render the name and stored data, if any */}
+                    <span>{titleCase(field.name)}:</span>
+                    <span>{education[field.name] || 'None'}</span>
+                  </div>
+                ))}
             </div>
             <button
               // Button to edit this education

@@ -102,13 +102,15 @@ function Experience({
           // Map each experience to a view of its data
           <div className="experience-instance" key={experience.id}>
             <div className="experience-pairs">
-              {experienceFields.map((field) => (
-                <div key={field.id}>
-                  {/* For each field, render the name and stored data, if any */}
-                  <span>{titleCase(field.name)}:</span>
-                  <span>{experience[field.name] || 'None'}</span>
-                </div>
-              ))}
+              {experienceFields
+                .filter((field) => ['company', 'jobTitle'].includes(field.name))
+                .map((field) => (
+                  <div key={field.id}>
+                    {/* For each field, render the name and stored data, if any */}
+                    <span>{titleCase(field.name)}:</span>
+                    <span>{experience[field.name] || 'None'}</span>
+                  </div>
+                ))}
             </div>
             <button
               // Button to edit this experience
