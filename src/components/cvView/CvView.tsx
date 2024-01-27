@@ -6,6 +6,28 @@ interface CvViewProps {
   experiences: Record<string, string>[]
 }
 
+function formatDate(date: string): string {
+  if (!date) {
+    return ''
+  }
+  const [year, monthNum] = date.split('-')
+  const month = {
+    '01': 'Jan',
+    '02': 'Feb',
+    '03': 'Mar',
+    '04': 'Apr',
+    '05': 'May',
+    '06': 'Jun',
+    '07': 'Jul',
+    '08': 'Aug',
+    '09': 'Sep',
+    '10': 'Oct',
+    '11': 'Nov',
+    '12': 'Dec'
+  }[monthNum]
+  return `${month} ${year}`
+}
+
 function CvView({
   userInfo,
   educations,
@@ -39,10 +61,17 @@ function CvView({
           <div key={education.id}>
             <h3>{education.course}</h3>
             <p>
-              {education.institution}, {education.start}
-              {' - '}
-              {education.end || 'Present'}
+              {education.institution} {education.grades}
             </p>
+            <p>
+              {((start, end) => {
+                if (start) {
+                  return end ? `${start} - ${end}` : `${start} - Present`
+                }
+                return end ? `Completed ${end}` : ''
+              })(formatDate(education.start), formatDate(education.end))}
+            </p>
+            <p>{education.additionalInfo}</p>
           </div>
         ))}
       </section>
@@ -53,14 +82,17 @@ function CvView({
           <div key={experience.id}>
             <h3>{experience.jobTitle}</h3>
             <p>
-              {experience.company}, {experience.start}
-              {' - '}
-              {experience.end || 'Present'}
+              {experience.company} {experience.location}
             </p>
-            <ul>
-              <li>{experience.responsibility1}</li>
-              <li>{experience.responsibility2}</li>
-            </ul>
+            <p>
+              {((start, end) => {
+                if (start) {
+                  return end ? `${start} - ${end}` : `${start} - Present`
+                }
+                return end ? `Completed ${end}` : ''
+              })(formatDate(experience.start), formatDate(experience.end))}
+            </p>
+            <p>{experience.responsibilities}</p>
           </div>
         ))}
       </section>
