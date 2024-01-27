@@ -1,17 +1,27 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
 }
 
 #root {
+  width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 4rem;
 }
 
-.card {
-  padding: 2em;
+@media (max-width: 600px) {
+  #root {
+    padding: 1rem 0.5rem;
+  }
 }
 
 section {
